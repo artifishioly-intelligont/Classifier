@@ -1,11 +1,12 @@
 from flask import Flask, request
+import logging
 import AppReactions as react
 
-app = Flask('Classifier')
+app = Flask(__name__)
 
 @app.route('/')
 def show_endpoints():
-    print 'Log::App::Message Received::/'
+    print "{} /".format(request.method)
     return 'Endpoints: <br>' \
            '\t/ -- List All Endpoints<br>' \
            '\t/guess/ -- Add the new feature<br>'
@@ -13,7 +14,7 @@ def show_endpoints():
 
 @app.route('/learn')
 def learn():
-    print 'Log::App::Message Received::/learn'
+    print "{} /learn".format(request.method)
 
     if request.method == 'GET':
         return react.learn_get()
@@ -25,7 +26,7 @@ def learn():
 
 @app.route('/guess')
 def guess():
-    print 'Log::App::Message Received::/guess'
+    print "{} /guess".format(request.method)
 
     if request.method == 'GET':
         return react.guess_get()
@@ -34,7 +35,11 @@ def guess():
     else:
         return react.unknown_method('/guess')
 
+
 if __name__ == '__main__':
     print 'Log::App:: Starting server'
+    print 'hi:{}'.format(app.logger.getEffectiveLevel())
+
+    app.logger.setLevel(logging.INFO)
     app.run()
     print 'Log::App:: Server closing'
