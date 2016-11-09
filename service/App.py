@@ -1,5 +1,4 @@
 from flask import Flask, request
-import logging
 import AppReactions as react
 
 app = Flask(__name__)
@@ -38,8 +37,5 @@ def guess():
 
 if __name__ == '__main__':
     print 'Log::App:: Starting server'
-    print 'hi:{}'.format(app.logger.getEffectiveLevel())
-
-    app.logger.setLevel(logging.INFO)
     app.run()
     print 'Log::App:: Server closing'
