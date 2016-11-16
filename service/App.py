@@ -1,5 +1,7 @@
 from flask import Flask, request
 import AppReactions as react
+import SVM as SVM
+from copy import deepcopy
 
 app = Flask(__name__)
 
@@ -18,8 +20,20 @@ def learn():
 
     if request.method == 'GET':
         return react.learn_get()
+        
     elif request.method == 'POST':
-        return react.learn_post()
+        true_class = request.form['feature']
+        vector_dict = request.get_json['vectors']
+        
+        attr_vecs = []
+        true_classes = []
+        for url in vector_dict.keys():
+            attr_vec = deepcopy(vector_dict[url])
+            attr_vecs.append(attr_vec)
+            true_classes.append(true_class)
+        
+        return react.learn_post(attr_vecs, true_classes)
+        
     else:
         return react.unknown_method('/learn')
 

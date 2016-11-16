@@ -1,3 +1,5 @@
+svm = SVM()
+
 def unknown_method(endpoint):
     return "<h1>Incorrect Usage</h1> \
     <br> {} does not know what to do with this request type".format(endpoint)
