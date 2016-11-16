@@ -8,7 +8,8 @@ def show_endpoints():
     print "{} /".format(request.method)
     return 'Endpoints: <br>' \
            '\t/ -- List All Endpoints<br>' \
-           '\t/guess/ -- Add the new feature<br>'
+           '\t/learn/ -- learn the class of a collection of vectors<br>' \
+           '\t/guess/ -- Guess the class of a collection of vectors<br>'
 
 
 @app.route('/learn')
