@@ -96,5 +96,5 @@ class MismatchUrlToClassException(Exception):
 
 if __name__ == '__main__':
     print 'Log::App:: Starting server'
-    app.run()
+    app.run(port=5002)
     print 'Log::App:: Server closing'
