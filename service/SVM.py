@@ -186,7 +186,7 @@ class SVM:
     class UnableToPredictException(Exception):
         pass    
         
-
+"""
 # An example / test of how to use these functions. Requires a table of attribute vectors and their classes
 if __name__ == "__main__":
     s = SVM("VECTOR_DATA.csv", "vectors.csv")
@@ -203,3 +203,4 @@ if __name__ == "__main__":
     s.learn([test_array_2],[100])
     
     s.save()
+"""
