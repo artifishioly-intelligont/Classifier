@@ -30,6 +30,8 @@ def learn():
         attr_vecs = []
         true_classes = []
         for url in vector_dict.keys():
+            # looks up the attribute vector matching the url in the dictionary, 
+            # converts each attribute to a float, and creates a deepcopy
             attr_vec = deepcopy([float(i) for i in vector_dict[url]])
             attr_vecs.append(attr_vec)
             true_classes.append(true_class)
@@ -60,6 +62,8 @@ def guess():
         attr_vecs = []
         
         for url in urls:
+            # looks up the attribute vector matching the url in the dictionary, 
+            # converts each attribute to a float, and creates a deepcopy
             attr_vec = deepcopy([float(i) for i in vector_dict[url]])
             attr_vecs.append(attr_vec)
             
