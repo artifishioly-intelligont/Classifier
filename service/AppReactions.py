@@ -1,3 +1,7 @@
+import SVM
+
+svm = SVM.SVM()
+
 def unknown_method(endpoint):
     return "<h1>Incorrect Usage</h1> \
     <br> {} does not know what to do with this request type".format(endpoint)
@@ -24,10 +28,10 @@ def guess_get():
     <br>POST expects a number of image files to be sent to it"
 
 
-def learn_post():
-    return 'Not Implemented Yet'
+def learn_post(attr_vecs, true_classes):
+    return svm.learn(attr_vecs, true_classes)
 
 
-def guess_post():
-    return 'Not Implemented Yet'
+def guess_post(attr_vecs):
+    return svm.predict(attr_vecs)
 
