@@ -1,3 +1,7 @@
+from copy import deepcopy
+import csv
+from itertools import izip
+
 
 class FeatureTable:
 
@@ -6,7 +10,16 @@ class FeatureTable:
     def __init__(self, start, increment_number, initital_entries):
         self.start = start
         self.increment_number = increment_number
-        self.feature_dictionary = initital_entries
+        self.csv_file = "TABLE_ENTRIES.csv"
+        self.feature_dictionary = {}
+        
+        try:
+            with open(self.csv_file) as myfile:
+                csvread = csv.reader(myfile)
+                for row in csvread:
+                    self.feature_dictionary[row[0]] = row[1]         
+        except IOError:
+            self.feature_dictionary = initital_entries
 
 
     def find_id(self, feature_name):
@@ -45,19 +58,34 @@ class FeatureTable:
         msg = feature_name.upper() in self.feature_dictionary.values()
 
         if n == 0:
-            self.feature_dictionary[1 * self.increment_number] = feature_name.upper()
+            self.feature_dictionary[1 * self.increment_number] = feature_name
             print 'Added'
             msg = True
         else:
             if not msg:
-                self.feature_dictionary[(n + 1) * self.increment_number] = feature_name.upper()
+                self.feature_dictionary[(n + 1) * self.increment_number] = feature_name
                 print 'Added'
                 msg = True
             else:
-                print 'Already Exist'
+                print 'Already Exists'
                 msg = False
 
         return msg
+    
+    
+    def save(self):
+        names = deepcopy(self.feature_dictionary.keys())
+        ids = deepcopy(self.feature_dictionary.values())
+        
+        # Save it locally
+        with open(self.csv_file, 'wb') as f:
+            wtr = csv.writer(f, delimiter= ',')
+            wtr.writerows(izip(names, ids))
+
+        
+    def __del__(self):
+    
+        self.save()
 
 if __name__ == "__main__":
 

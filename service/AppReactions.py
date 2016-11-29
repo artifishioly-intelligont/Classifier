@@ -1,4 +1,5 @@
 import classifier
+import json
 
 svm = classifier.svm
 tab = classifier.tab
@@ -36,3 +37,38 @@ def learn_post(attr_vecs, true_classes):
 def guess_post(attr_vecs):
     return classifier.guess(attr_vecs)
 
+    
+def get_all_features():
+    print 'Log::Classifier::Message Recieved::/features/'
+    features_name_list = tab.find_all_features()
+    data = {}
+
+    if len(features_name_list) > 0:
+        data['success'] = True
+        data['features'] = features_name_list
+    else:
+        data['success'] = False
+        data['features'] = 'No Feature Recorded.'
+
+    return json.dumps(data)
+
+"""
+An endpoint to add a new feature to the list
+
+ACCESS: GET
+
+Return: ??success or failure??
+"""
+def add_new_feature(new_feature):
+    print 'Log::Saturn::Message Recieved::/features/<new_feature>'
+    msg = tab.add_feature(new_feature)
+    data = {}
+
+    if msg:
+        data['success'] = True
+        data['feature'] = new_feature + ' recorded'
+    else:
+        data['success'] = False
+        data['feature'] = 'Feature already exit'
+
+    return json.dumps(data)
