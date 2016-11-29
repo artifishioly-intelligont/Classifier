@@ -22,10 +22,8 @@ def learn():
         return react.learn_get()
         
     elif request.method == 'POST':
-        true_class = float(request.get_json()['feature'])
+        true_class = request.get_json()['feature']
         vector_dict = request.get_json()['vectors']
-        
-        print len(vector_dict)
         
         attr_vecs = []
         true_classes = []
@@ -36,11 +34,11 @@ def learn():
             attr_vecs.append(attr_vec)
             true_classes.append(true_class)
         
-        react.learn_post(attr_vecs, true_classes)
+        success = react.learn_post(attr_vecs, true_classes)
         
         data = {}
         
-        data['success'] = True
+        data['success'] = success
         
         return json.dumps(data)
         
@@ -80,7 +78,7 @@ def guess():
             return json.dumps(data)
         
         for i in range (0, len(urls)):
-            data[str(urls[i])] = img_classes[i].item()
+            data[str(urls[i])] = img_classes[i]
             
         data["success"] = True        
         

@@ -64,7 +64,7 @@ class SVM:
             input_vectors: an array of attribute vectors
             true_values: an array of corresponding classes
     :return 
-            None
+            True or False (Success or Fail)
     :description
             Fits the SVM based on the data provided, and all 
             previous data used.
@@ -73,6 +73,7 @@ class SVM:
     
         if(len(input_vectors) != len(true_values)):
             raise self.MismatchedTrainingDataException("Number of attribute vectors doesn't match number of true values")
+            return False
         
         for i in range(len(input_vectors)):
             self.X.append(input_vectors[i])
@@ -80,8 +81,10 @@ class SVM:
         
         try:
             self.safe_fit()
+            return True
         except self.InsufficientDataForFitException as e:
-                print e
+            print e
+            return False
     
     """
     :function

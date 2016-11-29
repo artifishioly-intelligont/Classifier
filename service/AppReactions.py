@@ -1,6 +1,7 @@
-import SVM
+import classifier
 
-svm = SVM.SVM()
+svm = classifier.svm
+tab = classifier.tab
 
 def unknown_method(endpoint):
     return "<h1>Incorrect Usage</h1> \
@@ -29,9 +30,9 @@ def guess_get():
 
 
 def learn_post(attr_vecs, true_classes):
-    return svm.learn(attr_vecs, true_classes)
+    return classifier.learn(attr_vecs, true_classes)
 
 
 def guess_post(attr_vecs):
-    return svm.predict(attr_vecs)
+    return classifier.guess(attr_vecs)
 
