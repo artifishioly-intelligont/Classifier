@@ -1,5 +1,6 @@
 from copy import deepcopy
 import csv
+import os
 from itertools import izip
 
 
@@ -7,19 +8,29 @@ class FeatureTable:
 
     feature_dictionary = None
 
-    def __init__(self, start, increment_number, initital_entries):
-        self.start = start
-        self.increment_number = increment_number
+    def __init__(self, start=0, increment_number=100, initial_entries={100 : 'Building', 200 : 'House', 300 : 'Road', 400 : 'Tree'}):
         self.csv_file = "TABLE_ENTRIES.csv"
+        self.start = start
+        self.increment_number = increment_number    
         self.feature_dictionary = {}
         
-        try:
-            with open(self.csv_file) as myfile:
-                csvread = csv.reader(myfile)
-                for row in csvread:
-                    self.feature_dictionary[row[0]] = row[1]         
-        except IOError:
-            self.feature_dictionary = initital_entries
+        # Opens the csv file if it exists, and extracts its contents into feature_dictionary
+        if(os.path.isfile(self.csv_file)):
+            try:
+                with open(self.csv_file) as myfile:
+                    csvread = csv.reader(myfile)
+                    for row in csvread:
+                        self.feature_dictionary[int(row[0])] = row[1]
+                # If any of the entries in initial_entries are somehow missing, add them now
+                for id,name in initial_entries.items():
+                    if str(id) not in self.feature_dictionary.keys():
+                        self.feature_dictionary[id] = name
+                    
+            except IOError:
+                print "Could not open " + self.csv_file
+        # If it doesn't exist, just use the initial_entries
+        else:
+            self.feature_dictionary = initial_entries
 
 
     def find_id(self, feature_name):
@@ -46,8 +57,8 @@ class FeatureTable:
         store_features = []
         count = 0
 
-        if len(self.feature_dictionary) > 0:
-            store_features = self.feature_dictionary.values()
+        for id in sorted(self.feature_dictionary.keys()):
+            store_features.append(self.feature_dictionary[id])
 
         return store_features
 
@@ -55,7 +66,7 @@ class FeatureTable:
         n = len(self.feature_dictionary)
         msg = True
 
-        msg = feature_name.upper() in self.feature_dictionary.values()
+        msg = feature_name.upper() in [feature.upper() for feature in self.feature_dictionary.values()]
 
         if n == 0:
             self.feature_dictionary[1 * self.increment_number] = feature_name
@@ -73,18 +84,21 @@ class FeatureTable:
         return msg
     
     
-    def save(self):
-        names = deepcopy(self.feature_dictionary.keys())
-        ids = deepcopy(self.feature_dictionary.values())
+    def save(self):        
+        ids = deepcopy(sorted(self.feature_dictionary.keys()))
+        print ids
+        names = []
+
+        for id in ids:
+            names.append(deepcopy(self.feature_dictionary[id]))
         
         # Save it locally
         with open(self.csv_file, 'wb') as f:
             wtr = csv.writer(f, delimiter= ',')
-            wtr.writerows(izip(names, ids))
+            wtr.writerows(izip(ids, names))
 
         
     def __del__(self):
-    
         self.save()
 
 if __name__ == "__main__":

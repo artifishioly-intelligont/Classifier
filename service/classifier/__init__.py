@@ -1,7 +1,7 @@
 import SVM, table as Table
 
 svm = SVM.SVM()
-tab = Table.FeatureTable(0, 100, {100 : 'Building', 200 : 'House', 300 : 'Road', 400 : 'Tree'})
+tab = Table.FeatureTable()
 
 def guess(attr_vecs):
     """

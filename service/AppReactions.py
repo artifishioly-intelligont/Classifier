@@ -1,5 +1,6 @@
 import classifier
 import json
+import cgi
 
 svm = classifier.svm
 tab = classifier.tab
@@ -60,15 +61,15 @@ ACCESS: GET
 Return: ??success or failure??
 """
 def add_new_feature(new_feature):
-    print 'Log::Saturn::Message Recieved::/features/<new_feature>'
-    msg = tab.add_feature(new_feature)
+    print 'Log::Classifier::Message Recieved::/features/<new_feature>'
+    msg = tab.add_feature(cgi.escape(new_feature))
     data = {}
 
     if msg:
         data['success'] = True
-        data['feature'] = new_feature + ' recorded'
+        data['message'] = "'" + cgi.escape(new_feature) + "' added."
     else:
         data['success'] = False
-        data['feature'] = 'Feature already exit'
+        data['message'] = "'" + cgi.escape(new_feature) + "' already exists."
 
     return json.dumps(data)
