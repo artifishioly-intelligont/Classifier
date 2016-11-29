@@ -36,7 +36,7 @@ echo '--------------------------------------------------------------'
 echo "Searching for tests in ${PWD}"
 echo ''
 
-tests=$(find . -name test__*.py)
+tests=$(find ../ -name test__*.py)
 
 if [[ -z $tests ]]; then
 	echo 'No tests found, exiting.'

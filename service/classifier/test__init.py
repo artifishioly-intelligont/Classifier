@@ -1,10 +1,15 @@
 import unittest
 import __init__ as classifier
 import random
+import os
 
 class InitUnitTest(unittest.TestCase):
 
     def setUp(self):
+        self.feature_table_csv = "TABLE_ENTRIES.csv"
+        if(os.path.isfile(self.feature_table_csv)):
+            os.remove(self.feature_table_csv)
+            
         self.random_list_1 = []
         self.random_list_2 = []
         self.random_list = []
@@ -19,7 +24,7 @@ class InitUnitTest(unittest.TestCase):
             self.random_list_2.append(random.uniform(min_value, max_value))
             
         self.random_list.append(self.random_list_1)
-        self.random_list.append(self.random_list_2)
+        self.random_list.append(self.random_list_2) 
         
     def test_learn(self):
 
@@ -36,7 +41,7 @@ class InitUnitTest(unittest.TestCase):
         self.random_list
 
         #when feature attributes are fed into guess method
-        results = classifier.guess(self.random_list)
+        results, probabilities = classifier.guess(self.random_list)
         for result in results:
             bool = result in self.tab.feature_dictionary.values()
             

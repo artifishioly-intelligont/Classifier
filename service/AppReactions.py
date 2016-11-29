@@ -53,13 +53,7 @@ def get_all_features():
 
     return json.dumps(data)
 
-"""
-An endpoint to add a new feature to the list
 
-ACCESS: GET
-
-Return: ??success or failure??
-"""
 def add_new_feature(new_feature):
     print 'Log::Classifier::Message Recieved::/features/<new_feature>'
     msg = tab.add_feature(cgi.escape(new_feature))

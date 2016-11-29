@@ -28,6 +28,7 @@ class FeatureTable:
                     
             except IOError:
                 print "Could not open " + self.csv_file
+                self.feature_dictionary = initial_entries
         # If it doesn't exist, just use the initial_entries
         else:
             self.feature_dictionary = initial_entries
@@ -86,7 +87,6 @@ class FeatureTable:
     
     def save(self):        
         ids = deepcopy(sorted(self.feature_dictionary.keys()))
-        print ids
         names = []
 
         for id in ids:

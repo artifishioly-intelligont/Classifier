@@ -1,10 +1,14 @@
 import unittest
 import table
+import os
 
 class TableUnitTest(unittest.TestCase):
 
     def setUp(self):
-        self.tab = table.FeatureTable(0, 100, {100: 'Pond', 200: 'Tree', 300: 'Park', 400: 'Pathway'})
+        self.feature_table_csv = "TABLE_ENTRIES.csv"
+        if(os.path.isfile(self.feature_table_csv)):
+            os.remove(self.feature_table_csv)
+        self.tab = table.FeatureTable(0, 100, {100: 'Pond', 200: 'Tree', 300: 'Park', 400: 'Pathway'})        
 
     def test_find_name(self):
 

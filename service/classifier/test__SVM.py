@@ -84,7 +84,7 @@ class SVMTest(unittest.TestCase):
     def test_regression__SVM_predicts_correctly(self):
         
         # Initialises the SVM with the actual default data, so it can make an accurate prediction
-        s = SVM(self.seed_csv, "service/DEFAULT_VECTORS.csv")
+        s = SVM(self.seed_csv, "DEFAULT_VECTORS.csv")
         
         test_vec = []
         true_class = []
