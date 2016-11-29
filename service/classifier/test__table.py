@@ -6,9 +6,12 @@ class TableUnitTest(unittest.TestCase):
 
     def setUp(self):
         self.feature_table_csv = "TABLE_ENTRIES.csv"
+        self.seed_csv = "VECTOR_DATA.csv"
         if(os.path.isfile(self.feature_table_csv)):
             os.remove(self.feature_table_csv)
-        self.tab = table.FeatureTable(0, 100, {100: 'Pond', 200: 'Tree', 300: 'Park', 400: 'Pathway'})        
+        if(os.path.isfile(self.seed_csv)):
+            os.remove(self.seed_csv)
+        self.tab = table.FeatureTable()        
 
     def test_find_name(self):
 

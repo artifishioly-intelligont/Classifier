@@ -7,8 +7,11 @@ class InitUnitTest(unittest.TestCase):
 
     def setUp(self):
         self.feature_table_csv = "TABLE_ENTRIES.csv"
+        self.seed_csv = "VECTOR_DATA.csv"
         if(os.path.isfile(self.feature_table_csv)):
             os.remove(self.feature_table_csv)
+        if(os.path.isfile(self.seed_csv)):
+            os.remove(self.seed_csv)
             
         self.random_list_1 = []
         self.random_list_2 = []
