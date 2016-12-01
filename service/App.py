@@ -37,13 +37,7 @@ def learn():
             attr_vecs.append(attr_vec)
             true_classes.append(true_class)
         
-        success = react.learn_post(attr_vecs, true_classes)
-        
-        data = {}
-        
-        data['success'] = success
-        
-        return json.dumps(data)
+        return react.learn_post(attr_vecs, true_classes)
         
     else:
         return react.unknown_method('/learn')

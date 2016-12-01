@@ -7,6 +7,14 @@ import os
 
 class SVM:
 
+    SUCCESS = 0
+    MISSMATCH_ERROR = 1
+    INSUFFICIENT_DATA_ERROR = 2
+    
+    MESSAGES = ["Class learnt, ready to predict", "Length miss-match between attribute vectors and true classes", "Classifier must be trained on more classes before it can predict"]
+    IS_SUCCESS = [True, False, True]
+    IS_READY = [True, False, False]
+
     lin_clf = None
     csv_file = None
     
@@ -64,7 +72,7 @@ class SVM:
             input_vectors: an array of attribute vectors
             true_values: an array of corresponding classes
     :return 
-            True or False (Success or Fail)
+            State
     :description
             Fits the SVM based on the data provided, and all 
             previous data used.
@@ -73,7 +81,7 @@ class SVM:
     
         if(len(input_vectors) != len(true_values)):
             raise self.MismatchedTrainingDataException("Number of attribute vectors doesn't match number of true values")
-            return False
+            return MISSMATCH_ERROR
         
         for i in range(len(input_vectors)):
             self.X.append(input_vectors[i])
@@ -81,10 +89,10 @@ class SVM:
         
         try:
             self.safe_fit()
-            return True
+            return SUCCESS
         except self.InsufficientDataForFitException as e:
             print e
-            return False
+            return INSUFFICIENT_DATA_ERROR
     
     """
     :function

@@ -32,7 +32,12 @@ def guess_get():
 
 
 def learn_post(attr_vecs, true_classes):
-    return classifier.learn(attr_vecs, true_classes)
+    success = classifier.learn(attr_vecs, true_classes)
+    data = {}
+    
+    data['success'] = svm.IS_SUCCESS[success]
+    data['message'] = svm.MESSAGE[success]
+    data['ready'] = svm.IS_READY[success]
 
 
 def guess_post(attr_vecs):

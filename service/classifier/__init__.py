@@ -28,7 +28,7 @@ def learn(attr_vecs, true_class_names):
 
     :param attr_vec: The long list of numerical representations of the attributes extracted (by olivia module) of a sub-image
     :param true_class: The class that the sub-image belongs to
-    :return: None
+    :return: {1,2,3} depending on state
     """
     true_class_ids = []
     
