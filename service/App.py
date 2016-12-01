@@ -25,7 +25,7 @@ def learn():
         return react.learn_get()
         
     elif request.method == 'POST':
-        true_class = request.get_json()['feature']
+        true_class = request.get_json()['theme']
         vector_dict = request.get_json()['vectors']
         
         attr_vecs = []
