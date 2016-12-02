@@ -81,7 +81,7 @@ class SVM:
     
         if(len(input_vectors) != len(true_values)):
             raise self.MismatchedTrainingDataException("Number of attribute vectors doesn't match number of true values")
-            return MISSMATCH_ERROR
+            return self.MISSMATCH_ERROR
         
         for i in range(len(input_vectors)):
             self.X.append(input_vectors[i])
@@ -89,10 +89,10 @@ class SVM:
         
         try:
             self.safe_fit()
-            return SUCCESS
+            return self.SUCCESS
         except self.InsufficientDataForFitException as e:
             print e
-            return INSUFFICIENT_DATA_ERROR
+            return self.INSUFFICIENT_DATA_ERROR
     
     """
     :function
