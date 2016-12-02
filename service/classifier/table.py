@@ -8,7 +8,7 @@ class FeatureTable:
 
     feature_dictionary = None
 
-    def __init__(self, start=0, increment_number=100, initial_entries={100 : 'Building', 200 : 'House', 300 : 'Road', 400 : 'Tree'}):
+    def __init__(self, start=0, increment_number=100, initial_entries={100 : 'building', 200 : 'house', 300 : 'road', 400 : 'tree'}):
         self.csv_file = "TABLE_ENTRIES.csv"
         self.start = start
         self.increment_number = increment_number    
@@ -67,15 +67,15 @@ class FeatureTable:
         n = len(self.feature_dictionary)
         msg = True
 
-        msg = feature_name.upper() in [feature.upper() for feature in self.feature_dictionary.values()]
+        msg = feature_name.lower() in [feature.lower() for feature in self.feature_dictionary.values()]
 
         if n == 0:
-            self.feature_dictionary[1 * self.increment_number] = feature_name
+            self.feature_dictionary[1 * self.increment_number] = feature_name.lower()
             print 'Added'
             msg = True
         else:
             if not msg:
-                self.feature_dictionary[(n + 1) * self.increment_number] = feature_name
+                self.feature_dictionary[(n + 1) * self.increment_number] = feature_name.lower()
                 print 'Added'
                 msg = True
             else:
