@@ -36,7 +36,7 @@ def learn_post(attr_vecs, true_classes):
     data = {}
     
     data['success'] = svm.IS_SUCCESS[success]
-    data['message'] = svm.MESSAGE[success]
+    data['message'] = svm.MESSAGES[success]
     data['ready'] = svm.IS_READY[success]
 
     return data
