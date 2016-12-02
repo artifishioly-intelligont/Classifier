@@ -39,6 +39,8 @@ def learn_post(attr_vecs, true_classes):
     data['message'] = svm.MESSAGE[success]
     data['ready'] = svm.IS_READY[success]
 
+    return data
+
 
 def guess_post(attr_vecs):
     return classifier.guess(attr_vecs)
