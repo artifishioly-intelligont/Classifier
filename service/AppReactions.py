@@ -39,7 +39,7 @@ def learn_post(attr_vecs, true_classes):
     data['message'] = svm.MESSAGES[success]
     data['ready'] = svm.IS_READY[success]
 
-    return data
+    return json.dumps(data)
 
 
 def guess_post(attr_vecs):
