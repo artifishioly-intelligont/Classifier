@@ -58,7 +58,11 @@ class SVM:
                 print "No default data at '" + default_csv + "'"
             
         if len(self.X) != len(self.Y):
-            raise self.MismatchedTrainingDataException('Vector set and Class set are different lengths')
+            try: 
+                self.checkForMissmatch(self.X, self.Y, 'Fatal Error: Attribute Vector and True Class data sets are different lengths')
+            except MismatchedTrainingDataException as e:
+                print e
+                exit()
 
         try:
             self.safe_fit()
@@ -79,8 +83,10 @@ class SVM:
     """
     def learn(self, input_vectors, true_values):    
     
-        if(len(input_vectors) != len(true_values)):
-            raise self.MismatchedTrainingDataException("Number of attribute vectors doesn't match number of true values")
+        try:
+            self.checkForMissmatch(input_vectors, true_values, "Number of attribute vectors doesn't match number of true values")
+        except self.MismatchedTrainingDataException as e:
+            print e
             return self.MISSMATCH_ERROR
         
         for i in range(len(input_vectors)):
@@ -162,6 +168,10 @@ class SVM:
             raise self.UnableToPredictException("Unable to predict: SVM has not been fitted")
             return None, None
         
+        
+    def checkForMissmatch(self, list1, list2, message):
+        if(len(list1) != len(list2)):
+            raise self.MismatchedTrainingDataException(message)
     """
     :function
             save
