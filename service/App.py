@@ -25,17 +25,16 @@ def learn():
         return react.learn_get()
         
     elif request.method == 'POST':
-        true_class = request.get_json()['theme']
+        true_classes = request.get_json()['theme']
+        
         vector_dict = request.get_json()['vectors']
         
         attr_vecs = []
-        true_classes = []
         for url in vector_dict.keys():
             # looks up the attribute vector matching the url in the dictionary, 
             # converts each attribute to a float, and creates a deepcopy
             attr_vec = deepcopy([float(i) for i in vector_dict[url]])
             attr_vecs.append(attr_vec)
-            true_classes.append(true_class)
         
         return react.learn_post(attr_vecs, true_classes)
         
