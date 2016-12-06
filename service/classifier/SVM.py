@@ -23,7 +23,7 @@ class SVM:
     
     fitted = False
 
-    def __init__(self, seed_csv="VECTOR_DATA.csv", default_csv="DEFAULT_VECTORS.csv"):
+    def __init__(self, seed_csv=os.path.expanduser("~/VECTOR_DATA.csv"), default_csv=os.path.expanduser("~/DEFAULT_VECTORS.csv")):
     
         self.lin_clf = svm.SVC(kernel='linear',probability=True)
         self.csv_file = seed_csv
