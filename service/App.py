@@ -10,10 +10,12 @@ def show_endpoints():
     print "{} /".format(request.method)
     return 'Endpoints: <br>' \
            '\t/ -- List All Endpoints<br>' \
-           '\t/learn -- learn the class of a collection of vectors<br>' \
+           '\t/learn -- Learn the class of a collection of vectors<br>' \
            '\t/guess -- Guess the class of a collection of vectors<br>' \
            '\t/features -- Returns all features currently known to the SVM<br>' \
-           '\t/features/{new_feature} -- Adds {new feature} to the list of features<br>' 
+           '\t/features/{new_feature} -- Adds {new feature} to the list of features<br>' \
+           '\t/reset -- Resets the Classifier knowledge to the default values<br>' \
+           '\t/clear -- Clears all existing Classifier knowledge<br>'
            
 
 
