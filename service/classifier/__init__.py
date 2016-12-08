@@ -46,8 +46,7 @@ def learn(attr_vecs, true_class_names):
 def clear_memory():
     ready = svm.clear_memory()
     # If the SVM is not ready, it has cleared all its knowledge, so do the same in table
-    if not ready:
-        tab.clear_entries()
+    tab.clear_entries()
         
     return ready
     

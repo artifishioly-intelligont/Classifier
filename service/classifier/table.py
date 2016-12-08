@@ -2,6 +2,7 @@ from copy import deepcopy
 import csv
 import os
 from itertools import izip
+from copy import deepcopy
 
 
 class FeatureTable:
@@ -13,7 +14,7 @@ class FeatureTable:
         self.start = start
         self.increment_number = increment_number    
         self.feature_dictionary = {}
-        self.default_entries = initial_entries
+        self.default_entries = deepcopy(initial_entries)
         
         # Opens the csv file if it exists, and extracts its contents into feature_dictionary
         if(os.path.isfile(self.csv_file)):
@@ -22,17 +23,17 @@ class FeatureTable:
                     csvread = csv.reader(myfile)
                     for row in csvread:
                         self.feature_dictionary[int(row[0])] = row[1]
-                # If any of the entries in initial_entries are somehow missing, add them now
-                for id,name in initial_entries.items():
+                # If any of the entries in default_entries are somehow missing, add them now
+                for id,name in self.default_entries.items():
                     if str(id) not in self.feature_dictionary.keys():
                         self.feature_dictionary[id] = name
                     
             except IOError:
                 print "Could not open " + self.csv_file
-                self.feature_dictionary = initial_entries
-        # If it doesn't exist, just use the initial_entries
+                self.feature_dictionary = dict(self.default_entries)
+        # If it doesn't exist, just use the default_entries
         else:
-            self.feature_dictionary = initial_entries
+            self.feature_dictionary = dict(self.default_entries)
 
 
     def find_id(self, feature_name):
@@ -102,7 +103,7 @@ class FeatureTable:
         self.feature_dictionary = {}
     
     def reset_entries(self):
-        self.feature_dictionary = self.default_entries
+        self.feature_dictionary = dict(self.default_entries)
         
     def __del__(self):
         self.save()
