@@ -13,6 +13,7 @@ class FeatureTable:
         self.start = start
         self.increment_number = increment_number    
         self.feature_dictionary = {}
+        self.default_entries = initial_entries
         
         # Opens the csv file if it exists, and extracts its contents into feature_dictionary
         if(os.path.isfile(self.csv_file)):
@@ -96,7 +97,12 @@ class FeatureTable:
         with open(self.csv_file, 'wb') as f:
             wtr = csv.writer(f, delimiter= ',')
             wtr.writerows(izip(ids, names))
-
+            
+    def clear_entries(self):
+        self.feature_dictionary = {}
+    
+    def reset_entries(self):
+        self.feature_dictionary = self.default_entries
         
     def __del__(self):
         self.save()

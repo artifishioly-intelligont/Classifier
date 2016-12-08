@@ -106,7 +106,30 @@ Return: ??success or failure??
 @app.route('/features/<new_feature>')
 def add_new_feature(new_feature):
     return react.add_new_feature(new_feature)
-        
+    
+    
+    
+"""
+An endpoint to clear all of the SVM memory
+
+ACCESS: GET
+
+Return: ??success or failure??
+"""
+@app.route('/clear')
+def clear_memory():
+    return react.clear_memory()
+
+"""
+An endpoint to reset the SVM memory to its default values
+
+ACCESS: GET
+
+Return: ??success or failure??
+"""
+@app.route('/reset')
+def reset_memory():
+    return react.reset_memory()
         
 class MismatchUrlToClassException(Exception):
         pass

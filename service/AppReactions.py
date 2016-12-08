@@ -74,3 +74,25 @@ def add_new_feature(new_feature):
         data['message'] = "'" + cgi.escape(new_feature) + "' already exists."
 
     return json.dumps(data)
+
+    
+def clear_memory():
+    ready = classifier.clear_memory()
+    data = {}
+
+    data['success'] = True
+    data['ready'] = ready
+    data['message'] = "Classifier knowledge cleared."
+    
+    return json.dumps(data)
+
+
+def reset_memory():
+    ready, message = classifier.reset_memory()
+    data = {}
+     
+    data['success'] = True
+    data['ready'] = ready
+    data['message'] = message
+    
+    return json.dumps(data)
