@@ -239,9 +239,7 @@ class SVM:
             initialising it again with the default values.
     """ 
     def reset_memory(self):
-        self.X = []
-        self.Y = []
-        self.fitted = False
+        self.clear_memory()
         message = self.initialise_default_data()
         return self.fitted, message
 
