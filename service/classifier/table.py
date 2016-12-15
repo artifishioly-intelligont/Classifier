@@ -10,7 +10,7 @@ class FeatureTable:
     feature_dictionary = None
 
     def __init__(self, start=0, increment_number=100, initial_entries={100 : 'building', 200 : 'house', 300 : 'road', 400 : 'tree'}):
-        self.csv_file = "TABLE_ENTRIES.csv"
+        self.csv_file = os.path.expanduser("~/TABLE_ENTRIES.csv")
         self.start = start
         self.increment_number = increment_number    
         self.feature_dictionary = {}
